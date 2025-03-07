@@ -19,4 +19,4 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 
-message: HI! 1234
+message: HI!
