@@ -11,7 +11,3 @@
       ddl-auto: create
     show-sql: true
     defer-datasource-initialization: true
-
-
-
-message: HI!
