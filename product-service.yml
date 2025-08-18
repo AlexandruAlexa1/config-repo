@@ -1,24 +1,52 @@
-server:
-  port: 9000
-
 spring:
-  application:
-    name: product-service
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${rabbitmq.username:guest}
+    password: ${rabbitmq.password:guest}
+
+  datasource:
+    url: jdbc:h2:mem:productdb
+    driverClassName: org.h2.Driver
+    username: ${db.username:username}
+    password: ${db.password:password}
+
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
 
   h2:
     console:
       enabled: true
-      path: /h2-console
 
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: create
-    show-sql: true
-    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data.sql
 
-# Eureka Client
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - bus-refresh
+          - prometheus
+          
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKIN_URL:http://localhost:9411/api/v2/spans}
+
+  tracing:
+    sampling:
+      probability: 1.0
+      
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+custom:
+  message: "Welcome to the Product Service!"

@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:orderdb
+    url: jdbc:h2:mem:notificationdb
     driver-class-name: org.h2.Driver
     username: ${db.username:username}
     password: ${db.password:password}
@@ -15,30 +15,21 @@ spring:
       enabled: true
 
   cloud:
-    openfeign:
-      circuitbreaker:
-        enabled: true
-
     stream:
       default-binder: rabbit
       bindings:
-        order-out-0:
+        notification-in-0:
           destination: orders
+          group: notification-group
           content-type: application/json
-          
+          consumer:
+            auto-startup: true
+            
   rabbitmq:
-      host: ${RABBITMQ_HOST:localhost}
-      port: ${RABBITMQ_PORT:5672}
-      username: ${rabbitmq.username:guest}
-      password: ${rabbitmq.password:guest}
-
-resilience4j:
-  circuitbreaker:
-    instances:
-      product-service:
-        slidingWindowSize: 5
-        failureRateThreshold: 50
-        waitDurationInOpenState: 10s
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${rabbitmq.username:guest}
+    password: ${rabbitmq.password:guest}
 
 management:
   endpoints:
@@ -51,12 +42,14 @@ management:
           
   zipkin:
     tracing:
-      endpoint: ${ZIPKIN_URL:http://localhost:9411/api/v2/spans}
-          
+      endpoint: ${ZIPKIN_URL:http://localhost:9411/api/v2/spans}      
+      
   prometheus:
     metrics:
       export:
         enabled: true
-        
+       
 custom:
-  message: "Welcome to the Order Service!"
+  message: "Welcome to the Notification Service!"
+
+
