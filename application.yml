@@ -2,9 +2,9 @@ spring:
   rabbitmq:
     host: ${RABBITMQ_HOST:localhost}
     port: ${RABBITMQ_PORT:5672}
-    username: ${rabbitmq.username:guest}
-    password: ${rabbitmq.password:guest}
-          
+    username: ${VAULT_RABBITMQ_USER:guest}
+    password: ${VAULT_RABBITMQ_PASSWORD:guest}
+
   zipkin:
     tracing:
       endpoint: ${ZIPKIN_URL:http://localhost:9411/api/v2/spans}
@@ -12,6 +12,11 @@ spring:
   tracing:
     sampling:
       probability: 1.0
+
+  eureka:
+    client:
+      service-url:
+        defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
 
 management:
   endpoints:
