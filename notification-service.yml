@@ -18,14 +18,20 @@ spring:
     stream:
       default-binder: rabbit
       bindings:
-        notification-in-0:
+        notification-in-0:             # consumer -> ascultă mesaje
           destination: orders
           group: notification-group
           content-type: application/json
           consumer:
-            auto-startup: true      
-      
+            autoStartup: true          # binding-ul pornește automat
+      rabbit:
+        bindings:
+          notification-in-0:
+            consumer:
+              declareExchange: true    # se asigură că există exchange-ul
+              bindQueue: true          # leagă coada la exchange
+              declareQueue: true       # creează coada dacă nu există
+              autoBindDlq: true        # opțional: declară și dead-letter queue
+
 custom:
   message: "Welcome to the Notification Service!"
-
-
