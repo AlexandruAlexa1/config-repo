@@ -25,12 +25,6 @@ spring:
         order-out-0:
           destination: orders
           content-type: application/json
-          
-  rabbitmq:
-      host: ${RABBITMQ_HOST:localhost}
-      port: ${RABBITMQ_PORT:5672}
-      username: ${rabbitmq.username:guest}
-      password: ${rabbitmq.password:guest}
 
 resilience4j:
   circuitbreaker:
@@ -39,24 +33,6 @@ resilience4j:
         slidingWindowSize: 5
         failureRateThreshold: 50
         waitDurationInOpenState: 10s
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include:
-          - health
-          - bus-refresh
-          - prometheus
-          
-  zipkin:
-    tracing:
-      endpoint: ${ZIPKIN_URL:http://localhost:9411/api/v2/spans}
-          
-  prometheus:
-    metrics:
-      export:
-        enabled: true
         
 custom:
   message: "Welcome to the Order Service!"

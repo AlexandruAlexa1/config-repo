@@ -23,32 +23,8 @@ spring:
           group: notification-group
           content-type: application/json
           consumer:
-            auto-startup: true
-            
-  rabbitmq:
-    host: ${RABBITMQ_HOST:localhost}
-    port: ${RABBITMQ_PORT:5672}
-    username: ${rabbitmq.username:guest}
-    password: ${rabbitmq.password:guest}
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include:
-          - health
-          - bus-refresh
-          - prometheus
-          
-  zipkin:
-    tracing:
-      endpoint: ${ZIPKIN_URL:http://localhost:9411/api/v2/spans}      
+            auto-startup: true      
       
-  prometheus:
-    metrics:
-      export:
-        enabled: true
-       
 custom:
   message: "Welcome to the Notification Service!"
 
