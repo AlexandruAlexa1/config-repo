@@ -22,9 +22,16 @@ spring:
     stream:
       default-binder: rabbit
       bindings:
-        order-out-0:
+        order-out-0:                # producer -> publish events
           destination: orders
           content-type: application/json
+          producer:
+            autoStartup: true       # asigură pornirea bindingului
+      rabbit:
+        bindings:
+          order-out-0:
+            producer:
+              declareExchange: true # creează exchange-ul dacă nu există
 
 resilience4j:
   circuitbreaker:
@@ -33,6 +40,6 @@ resilience4j:
         slidingWindowSize: 5
         failureRateThreshold: 50
         waitDurationInOpenState: 10s
-        
+
 custom:
   message: "Welcome to the Order Service!"
