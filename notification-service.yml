@@ -20,7 +20,7 @@ spring:
     stream:
       default-binder: rabbit
       bindings:
-        notification-in-0:             # consumer -> ascultă mesaje
+        busConsumer-in-0:             # consumer -> ascultă mesaje
           destination: orders
           group: notification-group
           content-type: application/json
