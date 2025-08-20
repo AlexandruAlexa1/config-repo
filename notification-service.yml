@@ -15,6 +15,8 @@ spring:
       enabled: true
 
   cloud:
+    function:
+      definition: busConsumer
     stream:
       default-binder: rabbit
       bindings:
