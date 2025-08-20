@@ -16,24 +16,11 @@ spring:
 
   cloud:
     function:
-      definition: busConsumer
+      definition: notification
     stream:
-      default-binder: rabbit
       bindings:
-        busConsumer-in-0:             # consumer -> ascultă mesaje
+        notification-in-0:
           destination: orders
-          group: notification-group
-          content-type: application/json
-          consumer:
-            autoStartup: true          # binding-ul pornește automat
-      rabbit:
-        bindings:
-          notification-in-0:
-            consumer:
-              declareExchange: true    # se asigură că există exchange-ul
-              bindQueue: true          # leagă coada la exchange
-              declareQueue: true       # creează coada dacă nu există
-              autoBindDlq: true        # opțional: declară și dead-letter queue
 
 custom:
   message: "Welcome to the Notification Service!"
