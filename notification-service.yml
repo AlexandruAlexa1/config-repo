@@ -14,13 +14,5 @@ spring:
     console:
       enabled: true
 
-  cloud:
-    function:
-      definition: notification
-    stream:
-      bindings:
-        notification-in-0:
-          destination: orders
-
 custom:
   message: "Welcome to the Notification Service!"
