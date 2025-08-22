@@ -2,17 +2,13 @@ spring:
   datasource:
     url: jdbc:h2:mem:notificationdb
     driver-class-name: org.h2.Driver
-    username: ${db.username:username}
-    password: ${db.password:password}
+    username: ${db.username:sa}
+    password: ${db.password:}
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-
-  h2:
-    console:
-      enabled: true
 
 custom:
   message: "Welcome to the Notification Service!"

@@ -2,18 +2,14 @@ spring:
   datasource:
     url: jdbc:h2:mem:productdb
     driverClassName: org.h2.Driver
-    username: ${db.username:username}
-    password: ${db.password:password}
+    username: ${db.username:sa}
+    password: ${db.password:}
 
   jpa:
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: create
     show-sql: true
-
-  h2:
-    console:
-      enabled: true
 
   sql:
     init:

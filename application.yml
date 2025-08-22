@@ -2,8 +2,8 @@ spring:
   rabbitmq:
     host: ${RABBITMQ_HOST:localhost}
     port: ${RABBITMQ_PORT:5672}
-    username: ${VAULT_RABBITMQ_USER:guest}
-    password: ${VAULT_RABBITMQ_PASSWORD:guest}
+    username: ${rabbitmq.username:guest}
+    password: ${rabbitmq.password:guest}
 
   zipkin:
     tracing:
